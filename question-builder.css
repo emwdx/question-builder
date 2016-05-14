@@ -1,0 +1,276 @@
+/* CSS declarations go here */
+html{
+
+}
+
+body {
+    margin:20px;
+    font-family: 'Roboto' sans-serif;
+    background:transparent;
+    color: #111111;
+    width:90%;
+    padding-top: 70px;
+}
+
+#notEnoughCredits{
+
+ color:black;
+
+}
+#reassessmentCreditsBar{
+
+ color:rgb(100,100,100);
+ margin: 10px;
+
+}
+.darkText{
+
+    color:rgb(100,100,100);
+
+}
+.reassessmentButtons{
+
+ width:50%;
+
+}
+.reassessmentButtonsAdmin{
+
+ width:30%;
+ margin:3px;
+
+}
+
+.reassessmentItem{
+
+ border: solid 1px white;
+ border-radius:5px;
+ margin: 5px;
+
+
+}
+
+.userInfoItem{
+border: solid 1px white;
+ border-radius:5px;
+ margin: 5px;
+
+
+}
+
+
+#myBet{
+
+ width:60%;
+ font-size: 12px;
+
+}
+
+#announcementText{
+
+    width:60%;
+
+}
+#reviewStandardText{
+
+ width:20%px;
+}
+#reviewURL{
+
+ width: 80%;
+
+}
+
+.post{
+
+ background-color: #DDD;
+ color: #000;
+
+}
+
+.reviewCode{
+
+color:#DDD
+
+}
+
+#reassessmentsTotal{
+
+ float:left;
+ margin-left:10px;
+ margin-top:10px;
+
+}
+
+#yourReassessmentsTotal{
+ margin-left:10px;
+ margin-top:10px;
+ float:left;
+
+}
+.new{
+
+ font-size:0.6em;
+ color:red;
+ margin-right:5px;
+
+
+}
+
+table{
+width:100%;
+
+}
+
+
+
+#loginDiv{
+margin-top:10px;
+
+}
+
+.row{
+
+ margin:5px;
+
+
+}
+
+.background-white{
+
+background-color:#CCC;
+color:black;
+border-radius:4px;
+
+}
+
+button{
+
+color:black;
+
+}
+
+tr{
+  border: white solid 1px;
+
+
+
+}
+
+.creditExpiresDate{
+
+width:100px;
+
+}
+.expireCredit{
+text-align: center;
+width:30px;
+margin:5px;
+
+}
+.defaultExpiration{
+text-align: center;
+width:30px;
+margin:5px;
+
+}
+.restoreCredit{
+text-align: center;
+width:30px;
+margin:5px;
+
+}
+.quizQuestionSelected{
+background-color:#222;
+border-radius:5px;
+
+
+}
+
+#quizBackground{
+background-color:white;
+color:black;
+border-radius:10px;
+padding:10px;
+
+}
+
+.quizQuestionDisplay{
+
+padding:10px;
+margin:10px;
+font-size: 24px;
+border-top: 1px solid black;
+min-height:100px;
+
+}
+
+.desmos-container{
+
+height:400px;
+
+
+}
+
+.questionVarsHidden{
+
+display:none;
+
+}
+
+input{
+
+color:black;
+
+}
+
+.varContainer{
+
+border:solid 2px black;
+border-radius:4px;
+padding:4px;
+margin-left:4px;
+margin-right:4px;
+margin-top:10px;
+margin-bottom:10px;
+
+}
+
+#mqQuestionText{
+width:50%;
+
+
+}
+#mqQuestionAnswer{
+width:50%;
+
+
+}
+
+#questionAddPreviewText{
+
+min-height: 100px;
+border-right: 1px solid black;
+padding:5px;
+
+}
+#questionAddPreviewAnswer{
+
+min-height: 100px;
+border-left: 1px solid black;
+padding:5px;
+
+}
+
+.questionContainer{
+
+border:black 2px solid;
+border-radius: 5px;
+margin:3px;
+
+
+}
+.questionControlBar{
+border-top:1px black dotted;
+padding:3px;
+
+}

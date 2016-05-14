@@ -1,0 +1,8 @@
+
+<template name="adminTemplate">
+    {{#if isAdmin}}
+        {{> accountsAdmin}}
+    {{else}}
+        Must be admin to see this...
+    {{/if}}
+</template>

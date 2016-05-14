@@ -1,0 +1,314 @@
+
+<template name = "questionAdd">
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+  <h4>Looking for documentation and examples?</h4> <br><a href = "http://emwdx.github.io/qb-docs/docs.html" target = "_blank">Click here to open the documentation in a new window.</a>
+  <p> <b>Note:</b> You can click on the <span class = "glyphicon glyphicon-copy"></span> icons of any of the existing questions listed on the 'Browse All Questions' page to see how they work. </p>
+
+</div>
+</div>
+
+<h3>{{questionMode}} Question:</h3>
+<hr>
+<div class = "row">
+<div class = "col-md-6" id = "questionAddPreviewText">
+  <h5 class = "text-info text-center">Question Text Preview:</h5>
+
+  {{{previewText}}}
+</div>
+<div class = "col-md-6" id = "questionAddPreviewAnswer">
+  <h5 class = "text-info text-center">Question Answer Preview:</h5>
+
+  {{{previewAnswer}}}
+</div>
+
+</div>
+
+<hr>
+
+<div class = "row">
+<div class = "col-md-6">
+Question Text:
+<div class = "form-group">
+  <textarea id = "questionText" class = "form-control questionEntry">
+    {{{text}}} </textarea>
+
+</div>
+</div>
+<div class = "col-md-6">
+<div class = "form-group">
+Question Answer:
+  <textarea id = "questionAnswer" class = "form-control questionEntry">
+    {{{answer}}} </textarea>
+
+</div>
+</div>
+</div>
+
+<div class = "row">
+  <div class = "col-md-2">
+<button id = "addVar">Add Variable</button>
+</div>
+<div class = "col-md-2">
+<button id = "processVariables">Insert Values</button>
+</div>
+</div>
+
+<div id = "varList">
+{{#each vars}}
+
+
+{{>variable}}
+
+
+
+{{/each}}
+</div>
+<hr>
+<div class = "row">
+  <div class = "col-md-12 checkbox">
+
+    <input type = "checkbox" id = "shareQuestion" {{isPublic}}>
+<label >Check here to share this question with the <span class = "text-info">Question-Builder</span> community.</label>
+</div>
+</div>
+<div class = "row">
+  <div class = "col-md-12 text-center">
+<input type = "text" id = "addQuestionTitle" class = "form-control" placeholder = "Enter an optional title here." value = {{currentTitle}}>
+</div>
+</div>
+<div class = "row">
+  <div class = "col-md-12 text-center">
+<button id = "submitQuestion" class = "btn btn-primary">Save Question</button>
+</div>
+</div>
+
+
+  </template>
+
+
+<template name = "questionView">
+<div class = "row ">
+
+<div class = "col-md-6">
+  <h3>{{#if title}}
+    {{title}} -
+    {{/if}}
+    {{#if showHeader}}
+    Created by <span class = "text-info">{{this.user}}</span>
+
+    {{/if}}
+    </h3>
+</div>
+
+</div>
+  <div class = "row">
+
+
+
+
+<div class = "questionText col-md-5">
+<h6 class = "text-info">Question Text:</h6>
+  {{{questionText}}}
+</div>
+<div class = "questionAnswer col-md-5">
+<h6 class = "text-info ">Question Answer:</h6>
+  {{{questionAnswer}}}
+</div>
+<div class = "col-md-2">
+<button class = "reloadQuestion"><span class = "glyphicon glyphicon-random"></span></button>
+
+
+</div>
+
+
+
+  </div>
+  <div class = "row questionControlBar">
+    <div class = "col-md-4">
+    {{#if adminRights}}
+  <button class = "questionDelete btn btn-danger glyphicon glyphicon-trash"></button>
+  {{/if}}
+  <button class = "questionCopy btn btn-success glyphicon glyphicon-copy"></button>
+  {{#if adminRights}}
+  <button class = "questionEdit btn btn-info glyphicon glyphicon-pencil"></button>
+  {{/if}}
+</div>
+</div>
+
+
+</template>
+
+
+
+
+
+
+
+<template name = "desmosView">
+  <div class = "row">
+    <div class = "col-md-6">
+  <div class = "desmos-container">
+
+  </div>
+  <input type = "text" name = "desmos-input" id = "desmos-input">
+ </div>
+</div>
+</template>
+
+<template name = "desmos">
+  Desmos:
+  {{>desmosView}}
+</template>
+
+
+<template name = "listQuestions">
+ {{#if Template.subscriptionsReady}}
+
+  {{#each question}}
+
+  <div class = "questionContainer">
+
+  {{>questionView}}
+
+</div>
+
+  {{/each}}
+
+  {{/if}}
+
+  {{#unless Template.subscriptionsReady}}
+  {{>loading}}
+  {{/unless}}
+
+</template>
+
+
+<template name = "listMyQuestions">
+ <h2>These are the questions you have created:</h2>
+{{#if Template.subscriptionsReady}}
+  {{#each question}}
+
+  <div class = "questionContainer">
+
+  {{>questionView}}
+
+
+
+</div>
+
+  {{/each}}
+{{/if}}
+
+{{#unless Template.subscriptionsReady}}
+{{>loading}}
+{{/unless}}
+
+</template>
+
+<template name = "variable">
+<div class = "varContainer">
+<div class = "row">
+
+  <div class = "col-md-2 form-horizontal control-group">
+
+
+    <input type = "text" placeholder = "Variable ID" class = "varID form-control" value = "{{name}}" data-toggle="tooltip" data-placement="top" data-original-title="Give this variable a name. It must be different from the rest of the variable in the list." >
+  </div>
+
+
+      <div class = "col-md-2 form-horizontal control-group">
+    <select name = "varTypeSelect" class = "form-control varTypeSelect">
+
+      <option value = "rand-int" {{selectedIf type 'rand-int'}}>Random Integer</option>
+      <option value = "rand-dec" {{selectedIf type 'rand-dec'}}>Random Decimal</option>
+      <option value = "calc-val" {{selectedIf type 'calc-val'}}>Calculated Value</option>
+      <option value = "customJS" {{selectedIf type 'customJS'}}>Custom JS</option>
+    </select>
+
+  </div>
+  <div class = "col-md-6 form-horizontal">
+
+    {{#if isRandInt}}
+
+    {{>varRandomInt}}
+      {{/if}}
+    {{#if isRandDec}}
+    {{>varRandomDec}}
+    {{/if}}
+    {{#if isCalcVal}}
+    {{>varCalcVal}}
+    {{/if}}
+    {{#if isCustomJS}}
+    {{>varCustomJS}}
+    {{/if}}
+
+  </div>
+  <div class = "col-md-2 form-horizontal">
+    <button class = "varDelete text-danger btn"><span class = "glyphicon glyphicon-trash"></span></button>
+    {{this.value}}
+  </div>
+
+  </div>
+
+</div>
+
+</template>
+
+<template name = "varRandomInt">
+
+    <div class = "col-md-3">
+    <input type= "number" class = "varRandomIntMin varRandInt form-control" placeholder = "min" value = "{{this.options.min}}" data-toggle="tooltip" data-placement="top" data-original-title="Minimum value for {{this.name}}">
+  </div>
+    <div class = "col-md-3">
+    <input type= "number" class = "varRandomIntMax varRandInt form-control" placeholder = "max" value = "{{this.options.max}}" data-toggle="tooltip" data-placement="top" data-original-title="Maximum value for {{this.name}}">
+  </div>
+    <div class = "col-md-6">
+    <input type= "text" class = "varRandomIntExclude  varRandInt form-control" placeholder = "Values to Exclude?" value = "{{this.options.exclude}}" data-toggle="tooltip" data-placement="top" data-original-title="If there are values between {{this.options.min}} and {{this.options.max}} that you want to exclude, separate them with commas. (E.g. -1,0,1)">
+    </div>
+
+</template>
+<template name = "varRandomDec">
+
+<div class = "col-md-3">
+    <input type= "number" class = "varRandomDecMin varRandDec form-control" placeholder = "min" value = "{{this.options.min}}" data-toggle="tooltip" data-placement="top" data-original-title="Minimum value for {{this.name}}">
+</div>
+    <div class = "col-md-3">
+    <input type= "number" class = "varRandomDecMax varRandDec form-control" placeholder = "max" value = "{{this.options.max}}" data-toggle="tooltip" data-placement="top" data-original-title="Maximum value for {{this.name}}">
+  </div>
+    <div class = "col-md-6">
+    <input type= "number" class = "varRandomDecDP varRandDec form-control" placeholder = "Decimal Places" data-toggle="tooltip" data-placement="top" data-original-title="Enter the number of decimal places {{this.name}} should have.">
+      </div>
+
+</template>
+<template name = "varCalcVal">
+  <div class = "control-group">
+    Enter JS code to calculate this variable's value:
+    <input type = "text" class = "varCalcValText form-control" value = "{{this.text}}" data-toggle="tooltip" data-placement="top" data-original-title="This must be valid javascript ">
+ </div>
+</template>
+<template name = "varCustomJS">
+  <div class = "control-group">
+  <code>(function(){</code>
+    <textarea class = "varCustomJS form-control" rows = "6" cols = "20">
+      {{#if this.text}}
+      {{this.text}}
+      {{/if}}
+
+      {{#unless this.text}}
+
+
+
+        //Your code goes here! Be sure to enter a return statement.
+
+
+
+
+
+        {{/unless}}
+    </textarea>
+   <code>  })()</code>
+ </div>
+</template>

@@ -1,0 +1,166 @@
+<head>
+  <title>QuestionBuilder</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+
+</head>
+
+
+
+<template name = "mainContent">
+<div class = "container">
+
+
+{{> menuBar}}
+
+    {{> yield}}
+
+
+<div class = "row">
+  <h2 class = "text-center">
+   {{> loggingIn}}
+</h2>
+</div>
+</div>
+
+
+
+
+</template>
+
+
+
+
+<template name = "menuBar">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class = "navbar-header">
+
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+    </button>
+
+    <div class="navbar-brand navbar-inverse" >
+        <span class = "nav"> Question-Builder  <span class="badge text-warning">BETA</span> </span>
+    </div>
+    </div>
+     <div id="navbar" class="navbar-collapse collapse">
+
+      <ul class="nav navbar-nav">
+        {{#if currentUser}}
+      <li><a href = "#">{{>loginButtons}}</a></li>
+      {{/if}}
+      <li id = "About"><a href="/">About</a></li>
+      <li id = "CreateNew"><a href="/questions/edit/add">Create New</a></li>
+      <li id = "listQuestions"><a href="/list-all-questions/">Browse All</a></li>
+      <li id = "listMyQuestions"><a href="/list-my-questions/">My Questions</a></li>
+
+        {{#if isAdmin}}
+      <li class = "dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b>User Management</a>
+      <ul class = "dropdown-menu">
+
+
+        <li id = "usermanagement"><a href = "/admin/">Manage Users</a></li>
+        <li id = "desmos"><a href = "/desmos/">Desmos</a></li>
+
+
+
+        </ul>
+    </li>
+
+    {{/if}}
+
+
+  </ul>
+    </div>
+</div>
+</nav>
+
+</template>
+
+
+
+<template name = "loggingIn">
+    {{#if isLoggingIn}}
+<p class = "text-center text-info">Logging in to Question-Builder...</p>
+    {{>spinner}}
+    {{/if}}
+</template>
+
+<template name = "loading">
+
+<p class = "text-center text-info">Loading...</p>
+    {{>spinner}}
+
+</template>
+
+
+<template name = "defaultPage">
+<h2 class = "text-center">Welcome to Question-Builder!</h2>
+<hr>
+<div class = "row">
+<div class = "col-md-8 col-md-offset-2 jumbotron">
+  <h3>
+  <span class = "text-info">Question-Builder</span> is an online tool for building assessment questions with built-in randomized values, text, or structures.
+</h3>
+</div>
+</div>
+
+<div class = "row">
+<div class = "col-md-12">
+<img src = "/example1.gif" class="img-responsive">
+
+</div>
+</div>
+<hr>
+<div class = "row">
+<div class = "col-md-8 col-md-offset-2 jumbotron">
+  <h3>
+  Questions are built using <code>HTML</code> tags and the <strong>@</strong> symbol to identify variables. Variable values can be calculated using a built-in or custom JavaScript functions.</h3>
+</div>
+</div>
+
+<div class = "row">
+<div class = "col-md-12">
+<img src = "/create.png" class="img-responsive">
+
+</div>
+</div>
+<hr>
+<div class = "row">
+<div class = "col-md-8 col-md-offset-2 jumbotron">
+  <h3>
+  You can edit, delete, and share the questions you create with the rest of the community. It is also easy to <span class = "text-success">copy</span> questions that others have made, modify them, and then re-share your version for others to use.
+</h3>
+</div>
+</div>
+
+<div class = "row">
+<div class = "col-md-8 col-md-offset-2 text-center">
+  <h3>
+  Interested in giving it a try?
+  <p>
+    <a href = "/register/">Sign up here.</a>
+    </p>
+</h3>
+</div>
+</div>
+
+</template>
+
+<template name = "registerAccount">
+
+
+
+<div class = "row">
+<div class = "col-md-8 col-md-offset-2">
+    {{>atForm state='signUp'}}
+</div>
+</div>
+
+
+</template>
